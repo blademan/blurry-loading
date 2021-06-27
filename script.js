@@ -7,13 +7,16 @@ let int = setInterval(blurring, 30);
 
 function blurring() {
   load++;
-  blur--;
   if (load > 99) {
     clearInterval(int);
   }
-  loading.style.opacity = blur / 100;
+  loading.style.opacity = scaleNumber(load, 0, 100, 1, 0);
 
-  bg.style.webkitFilter = `blur(${blur}px)`;
+  bg.style.webkitFilter = `blur(${scaleNumber(load, 0, 100, 30, 0)}px)`;
 
   loading.innerHTML = load + "%";
 }
+
+const scaleNumber = (num, in_min, in_max, out_min, out_max) => {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+};
